@@ -9,10 +9,12 @@ namespace CR.Logging
 {
     public static class Logging
     {
+        public static LoggingLevelSwitch LogLevelSwitch = new LoggingLevelSwitch();
+
         public static Logger SetupLogger()
         {
             var logger = new LoggerConfiguration();
-
+            //TODO: Probably could be cleaned up.
             var jsonLoggingEnabled = ConfigurationManager.AppSettings["CR.Logging.Json.Enabled"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["CR.Logging.Json.Enabled"]);
             var jsonMinLogLevel = LogEventLevel.Debug;
             LogEventLevel.TryParse(ConfigurationManager.AppSettings["CR.Logging.Json.MinLogLevel"], out jsonMinLogLevel);
@@ -33,6 +35,9 @@ namespace CR.Logging
             var consoleMinLogLevel = LogEventLevel.Debug;
             LogEventLevel.TryParse(ConfigurationManager.AppSettings["CR.Logging.Console.MinLogLevel"], out consoleMinLogLevel);
 
+            logger.MinimumLevel.ControlledBy(LogLevelSwitch);
+
+            //TODO: Probably could be done better.
             if (jsonLoggingEnabled)
                 logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile,jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit,jsonFileSizeLimit);
 
@@ -47,6 +52,7 @@ namespace CR.Logging
 
         private static void WriteToFile(this LoggerConfiguration loggerConfig,ITextFormatter formatter, string filePath,LogEventLevel logLevel, RollingInterval rollingInterval,bool rollOnFileSizeLimit, long fileSizeLimitBytes)
         {
+            //TODO: Not sure if this is needed or if Serilog handles this.
             if(rollOnFileSizeLimit && fileSizeLimitBytes <= 0)
                 throw new ArgumentException("Cannot have rolling file and the size set to zero bytes.");
 
@@ -59,5 +65,7 @@ namespace CR.Logging
                     rollingInterval: rollingInterval, rollOnFileSizeLimit: rollOnFileSizeLimit,
                     fileSizeLimitBytes: fileSizeLimitBytes);
         }
+
+
     }
 }
