@@ -14,35 +14,47 @@ namespace CR.Logging
         public static Logger SetupLogger()
         {
             var logger = new LoggerConfiguration();
-            //TODO: Probably could be cleaned up.
-            var jsonLoggingEnabled = ConfigurationManager.AppSettings["CR.Logging.Json.Enabled"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["CR.Logging.Json.Enabled"]);
-            var jsonMinLogLevel = LogEventLevel.Debug;
-            LogEventLevel.TryParse(ConfigurationManager.AppSettings["CR.Logging.Json.MinLogLevel"], out jsonMinLogLevel);
-            var jsonLogFile = ConfigurationManager.AppSettings["CR.Logging.Json.FilePath"] == null ? "./logs/log.json" : ConfigurationManager.AppSettings["CR.Logging.Json.FilePath"];
-            var jsonFileRotationTime = RollingInterval.Day;
-            RollingInterval.TryParse(ConfigurationManager.AppSettings["CR.Logging.Json.FileRotationTime"], out jsonFileRotationTime);
-            var jsonFileRotateOnFileSizeLimit = ConfigurationManager.AppSettings["CR.Logging.Json.RotateOnFileSizeLimit"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["CR.Logging.Json.RotateOnFileSizeLimit"]);
-            var jsonFileSizeLimit = ConfigurationManager.AppSettings["CR.Logging.Json.FileRotationSizeLimit"] == null ? 26214400 : Convert.ToInt64(ConfigurationManager.AppSettings["CR.Logging.Json.FileRotationSizeLimit"]);
-            var textLoggingEnabled = ConfigurationManager.AppSettings["CR.Logging.Text.Enabled"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["CR.Logging.Text.Enabled"]);
-            var textMinLogLevel = LogEventLevel.Debug;
-            LogEventLevel.TryParse(ConfigurationManager.AppSettings["CR.Logging.Text.MinLogLevel"], out textMinLogLevel);
-            var textLogFile = ConfigurationManager.AppSettings["CR.Logging.Text.FilePath"] == null ? "./logs/log.log" : ConfigurationManager.AppSettings["CR.Logging.Text.FilePath"];
-            var textFileRotationTime = RollingInterval.Day;
-            RollingInterval.TryParse(ConfigurationManager.AppSettings["CR.Logging.Text.FileRotationTime"], out textFileRotationTime);
-            var textFileRotarteOnFileSizeLimit = ConfigurationManager.AppSettings["CR.Logging.Text.RotateOnFileSizeLimit"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["CR.Logging.Text.RotateOnFileSizeLimit"]);
-            var textFileSizeLimit = ConfigurationManager.AppSettings["CR.Logging.Text.FileRotationSizeLimit"] == null ? 26214400 : Convert.ToInt64(ConfigurationManager.AppSettings["CR.Logging.Text.FileRotationSizeLimit"]);
-            var consoleLoggingEnabled =ConfigurationManager.AppSettings["CR.Logging.Console.Enabled"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["CR.Logging.Console.Enabled"]);
-            var consoleMinLogLevel = LogEventLevel.Debug;
-            LogEventLevel.TryParse(ConfigurationManager.AppSettings["CR.Logging.Console.MinLogLevel"], out consoleMinLogLevel);
+
+            #region Mandatory Fields
+            var jsonLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Json.Enabled", bool.TryParse);
+
+            var jsonFileRotateOnFileSizeLimit = ParseConfigValue<bool>("CR.Logging.Json.RotateOnFileSizeLimit", bool.TryParse);
+
+            var textLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Text.Enabled", bool.TryParse);
+
+            var textFileRotateOnFileSizeLimit = ParseConfigValue<bool>("CR.Logging.Text.RotateOnFileSizeLimit", bool.TryParse);
+
+            var consoleLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Console.Enabled", bool.TryParse);
+            #endregion
+
+            #region Optional Fields
+            var jsonLogFile = GetConfigString("CR.Logging.Json.FilePath", "./logs/log.json");
+
+            var jsonMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+
+            var jsonFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Json.MinLogLevel", Enum.TryParse, RollingInterval.Day);
+
+            var jsonFileSizeLimit = ParseConfigValue<long>("CR.Logging.Json.FileRotationSizeLimit", long.TryParse, 26214400);
+
+            var textLogFile = GetConfigString("CR.Logging.Text.FilePath", "./logs/log.log");
+
+            var textMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Text.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+
+            var textFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Text.FileRotationTime", Enum.TryParse, RollingInterval.Day);
+
+            var textFileSizeLimit = ParseConfigValue<long>("CR.Logging.Text.FileRotationSizeLimit", long.TryParse, 26214400);
+
+            var consoleMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+            #endregion
 
             logger.MinimumLevel.ControlledBy(LogLevelSwitch);
 
             //TODO: Probably could be done better.
             if (jsonLoggingEnabled)
-                logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile,jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit,jsonFileSizeLimit);
+                logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
 
             if (textLoggingEnabled)
-                logger.WriteToFile(null, textLogFile,textMinLogLevel,textFileRotationTime,textFileRotarteOnFileSizeLimit,textFileSizeLimit);
+                logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
 
             if (consoleLoggingEnabled)
                 logger.WriteTo.Console(consoleMinLogLevel);
@@ -50,10 +62,10 @@ namespace CR.Logging
             return logger.CreateLogger();
         }
 
-        private static void WriteToFile(this LoggerConfiguration loggerConfig,ITextFormatter formatter, string filePath,LogEventLevel logLevel, RollingInterval rollingInterval,bool rollOnFileSizeLimit, long fileSizeLimitBytes)
+        private static void WriteToFile(this LoggerConfiguration loggerConfig, ITextFormatter formatter, string filePath, LogEventLevel logLevel, RollingInterval rollingInterval, bool rollOnFileSizeLimit, long fileSizeLimitBytes)
         {
             //TODO: Not sure if this is needed or if Serilog handles this.
-            if(rollOnFileSizeLimit && fileSizeLimitBytes <= 0)
+            if (rollOnFileSizeLimit && fileSizeLimitBytes <= 0)
                 throw new ArgumentException("Cannot have rolling file and the size set to zero bytes.");
 
             if (formatter == null)
@@ -66,6 +78,23 @@ namespace CR.Logging
                     fileSizeLimitBytes: fileSizeLimitBytes);
         }
 
+        private delegate bool TryParse<in T1, T2>(T1 valueToParse, out T2 obj2);
 
+        private static T ParseConfigValue<T>(string configName, TryParse<string, T> tryParse, T? defaultValue = null) where T : struct
+        {
+            var valueString = ConfigurationManager.AppSettings[configName];
+            if (defaultValue.HasValue)
+            {
+                if (string.IsNullOrWhiteSpace(valueString)) return defaultValue.Value;
+            }
+            else if (string.IsNullOrWhiteSpace(valueString)) throw new ArgumentNullException($"Please specify a {typeof(T).Name} value for {configName} in the App.config.", configName);
+            return tryParse(valueString, out var value) ? value : throw new ArgumentException($"Invalid {typeof(T).Name} value specified for {configName}.", configName);
+        }
+
+        private static string GetConfigString(string configName, string defaultValue = null)
+        {
+            var value = ConfigurationManager.AppSettings[configName];
+            return string.IsNullOrWhiteSpace(value) ? defaultValue ?? throw new ArgumentNullException($"Please specify a value for {configName} in the App.config.", configName) : value;
+        }
     }
 }
