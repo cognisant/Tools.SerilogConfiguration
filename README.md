@@ -48,3 +48,13 @@ If an invalid value (not empty/whitespace) is entered in any of these fields, ho
 
 ### File Size Limits
 File size limits are specified in bytes.
+
+## Usage
+
+Logging via Serilog is simple:
+
+    logger.Error("{value} is larger than {max}. Cannot fulfill request {@request}", value, max, request);
+    
+JSON layouts will store the template string as it appears above, as well as each of the parameters specified after the template string, while text layouts will replace the properties in the template string, and output the result.
+
+When specifying a property in the template string, `{property}` will result in `.ToString()` being called on the provided object, while `{@property}` will result in the object being serialized.
