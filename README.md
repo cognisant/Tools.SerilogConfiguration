@@ -16,7 +16,7 @@ All of these values are booleans.
 
 ### Optional Parameters
 
-The following appsettings are mandatory; the program will not fail of these are not specified in the app.config, or their values are empty/whitepace.
+The following appsettings are not mandatory; the program will not fail of these are not specified in the app.config, or their values are empty/whitepace.
 
 If an invalid value (not empty/whitespace) is entered in any of these fields, however, the program will fail.
 
