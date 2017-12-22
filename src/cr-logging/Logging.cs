@@ -9,8 +9,6 @@ namespace CR.Logging
 {
     public static class Logging
     {
-        public static LoggingLevelSwitch LogLevelSwitch = new LoggingLevelSwitch();
-
         public static Logger SetupLogger()
         {
             var logger = new LoggerConfiguration();
@@ -55,19 +53,11 @@ namespace CR.Logging
             var consoleMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
             #endregion
 
-            logger.MinimumLevel.ControlledBy(LogLevelSwitch);
+            if (jsonLoggingEnabled) logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
+            if (textLoggingEnabled) logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
+            if (consoleLoggingEnabled) logger.WriteTo.Console(consoleMinLogLevel);
 
-            //TODO: Probably could be done better.
-            if (jsonLoggingEnabled)
-                logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
-
-            if (textLoggingEnabled)
-                logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
-
-            if (consoleLoggingEnabled)
-                logger.WriteTo.Console(consoleMinLogLevel);
-
-            return logger.CreateLogger();
+            return logger.MinimumLevel.ControlledBy(new LoggingLevelSwitch()).CreateLogger();
         }
 
         private static void WriteToFile(this LoggerConfiguration loggerConfig, ITextFormatter formatter, string filePath, LogEventLevel logLevel, RollingInterval rollingInterval, bool rollOnFileSizeLimit, long fileSizeLimitBytes)
