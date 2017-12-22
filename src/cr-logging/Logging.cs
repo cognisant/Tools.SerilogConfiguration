@@ -16,18 +16,23 @@ namespace CR.Logging
             var logger = new LoggerConfiguration();
 
             #region Mandatory Fields
+            #region Json
             var jsonLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Json.Enabled", bool.TryParse);
 
             var jsonFileRotateOnFileSizeLimit = ParseConfigValue<bool>("CR.Logging.Json.RotateOnFileSizeLimit", bool.TryParse);
+            #endregion
 
+            #region Text
             var textLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Text.Enabled", bool.TryParse);
 
             var textFileRotateOnFileSizeLimit = ParseConfigValue<bool>("CR.Logging.Text.RotateOnFileSizeLimit", bool.TryParse);
+            #endregion
 
             var consoleLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Console.Enabled", bool.TryParse);
             #endregion
 
             #region Optional Fields
+            #region Json
             var jsonLogFile = GetConfigString("CR.Logging.Json.FilePath", "./logs/log.json");
 
             var jsonMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
@@ -35,7 +40,9 @@ namespace CR.Logging
             var jsonFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Json.MinLogLevel", Enum.TryParse, RollingInterval.Day);
 
             var jsonFileSizeLimit = ParseConfigValue<long>("CR.Logging.Json.FileRotationSizeLimit", long.TryParse, 26214400);
+            #endregion
 
+            #region Text
             var textLogFile = GetConfigString("CR.Logging.Text.FilePath", "./logs/log.log");
 
             var textMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Text.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
@@ -43,6 +50,7 @@ namespace CR.Logging
             var textFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Text.FileRotationTime", Enum.TryParse, RollingInterval.Day);
 
             var textFileSizeLimit = ParseConfigValue<long>("CR.Logging.Text.FileRotationSizeLimit", long.TryParse, 26214400);
+            #endregion
 
             var consoleMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
             #endregion
