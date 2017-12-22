@@ -35,7 +35,7 @@ namespace CR.Logging
 
             var jsonMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
 
-            var jsonFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Json.MinLogLevel", Enum.TryParse, RollingInterval.Day);
+            var jsonFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
 
             var jsonFileSizeLimit = ParseConfigValue<long>("CR.Logging.Json.FileRotationSizeLimit", long.TryParse, 26214400);
             #endregion
@@ -62,18 +62,9 @@ namespace CR.Logging
 
         private static void WriteToFile(this LoggerConfiguration loggerConfig, ITextFormatter formatter, string filePath, LogEventLevel logLevel, RollingInterval rollingInterval, bool rollOnFileSizeLimit, long fileSizeLimitBytes)
         {
-            //TODO: Not sure if this is needed or if Serilog handles this.
-            if (rollOnFileSizeLimit && fileSizeLimitBytes <= 0)
-                throw new ArgumentException("Cannot have rolling file and the size set to zero bytes.");
-
-            if (formatter == null)
-                loggerConfig.WriteTo.File(filePath, logLevel,
-                    rollingInterval: rollingInterval, rollOnFileSizeLimit: rollOnFileSizeLimit,
-                    fileSizeLimitBytes: fileSizeLimitBytes);
-            else
-                loggerConfig.WriteTo.File(formatter, filePath, logLevel,
-                    rollingInterval: rollingInterval, rollOnFileSizeLimit: rollOnFileSizeLimit,
-                    fileSizeLimitBytes: fileSizeLimitBytes);
+            if (rollOnFileSizeLimit && fileSizeLimitBytes <= 0) throw new ArgumentException("Cannot have rolling file and the size set to zero bytes.");
+            if (formatter == null) loggerConfig.WriteTo.File(filePath, logLevel, rollingInterval: rollingInterval, rollOnFileSizeLimit: rollOnFileSizeLimit, fileSizeLimitBytes: fileSizeLimitBytes);
+            else loggerConfig.WriteTo.File(formatter, filePath, logLevel, rollingInterval: rollingInterval, rollOnFileSizeLimit: rollOnFileSizeLimit, fileSizeLimitBytes: fileSizeLimitBytes);
         }
 
         private delegate bool TryParse<in T1, T2>(T1 valueToParse, out T2 obj2);
