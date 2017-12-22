@@ -29,7 +29,7 @@ If an invalid value (not empty/whitespace) is entered in any of these fields, ho
     <add key="CR.Logging.Text.FileRotationTime" value="Month"/> <!-- Default: 'Day' -->
     <add key="CR.Logging.Text.FileRotationSizeLimit" value="10000000"/> <!-- Default: '26214400' -->
     <add key="CR.Logging.Console.MinLogLevel" value="Warning"/> <!-- Default: 'Debug' -->
-    
+
 ### Log Levels
 - Verbose (0)
 - Debug (1)
@@ -45,3 +45,6 @@ If an invalid value (not empty/whitespace) is entered in any of these fields, ho
 - Day (3)
 - Hour (4)
 - Minute (5)
+
+### File Size Limits
+File size limits are specified in bytes.
