@@ -1,6 +1,6 @@
-@echo off
+@echo on
 
-If NOT  exit "./packages/FAKE/tools/Fake.exe" (
+If NOT exist "./packages/FAKE/tools/Fake.exe" (
 ".nuget/NuGet.exe" "Install" "FAKE" "-OutputDirectory" "packages" "-ExcludeVersion"
 )
 
@@ -16,5 +16,5 @@ IF NOT [%3]==[] (set VERSION=%3)
 dotnet publish -p:PackageVersion=%VERSION% cr-logging -o ../build/cr-logging -c Release --self-contained -r -win-x86
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-"packages/FAKE/tool/Fake.exe" build.fsx "target=%TARGET%" "buildMode=%BUILDMODE%" "version=%VERSION%"
+"packages/FAKE/tools/Fake.exe" build.fsx "target=%TARGET%" "buildMode=%BUILDMODE%" "version=%VERSION%"
 if %errorlevel% neq 0 exit /b %errorlevel%

@@ -13,7 +13,7 @@ Function Build-Fake([string]$folderName){
     cp $folderName\dist\*.nupkg .\dist
 
     if($LastExitCode -ne 0){
-        throw "$floederName build failed"
+        throw "$folderName build failed"
     }
 }
 
