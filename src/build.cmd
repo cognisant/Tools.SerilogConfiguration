@@ -1,4 +1,4 @@
-@echo on
+@echo off
 
 If NOT exist "./packages/FAKE/tools/Fake.exe" (
 ".nuget/NuGet.exe" "Install" "FAKE" "-OutputDirectory" "packages" "-ExcludeVersion"
