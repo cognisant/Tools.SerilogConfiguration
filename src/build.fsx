@@ -10,6 +10,9 @@ let packageDir = "./dist/"
 let projectName = "cr-logging"
 let projectFolder = buildDir + projectName
 
+let projectNameES = "cr-logging.eventstore"
+let projectFolderES = buildDir + projectNameES
+
 let zipPath name = packageDir + name + "-" + version + ".zip"
 
 Target "Clean" (fun _ ->
@@ -20,8 +23,14 @@ Target "Package-Project" (fun _ ->
     let nugetPackageName = "CR.Logging"
     let nugetPackageDescription = "A wrapper for initialising Serilog consistently."
 
+    let nugetPackageESName = "CR.Logging.Eventstore"
+    let nugetPackageESDescription = "A wrapper for initialising Serilog consistently supporting eventstore."
+
     zipPackage projectFolder (zipPath projectName)
     nugetPackage projectFolder nugetPackageName nugetPackageDescription packageDir
+
+    zipPackage projectFolderES (zipPath projectNameES)
+    nugetPackage projectFolderES nugetPackageESName nugetPackageESDescription packageDir
 )
 
 Target "Post-Clean" (fun _ ->
