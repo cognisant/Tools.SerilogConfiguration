@@ -18,6 +18,6 @@ Function Build-Fake([string]$folderName){
 }
 
 rmdir -R dist
-mkdir dir
+mkdir dist
 
 Build-Fake "src"
