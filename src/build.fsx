@@ -19,20 +19,6 @@ Target "Clean" (fun _ ->
     CleanDirs [packageDir]
 )
 
-Target "Package-Project" (fun _ ->
-    let nugetPackageName = "CR.Logging"
-    let nugetPackageDescription = "A wrapper for initialising Serilog consistently."
-
-    let nugetPackageESName = "CR.Logging.Eventstore"
-    let nugetPackageESDescription = "A wrapper for initialising Serilog consistently supporting eventstore."
-
-    zipPackage projectFolder (zipPath projectName)
-    nugetPackage projectFolder nugetPackageName nugetPackageDescription packageDir
-
-    zipPackage projectFolderES (zipPath projectNameES)
-    nugetPackage projectFolderES nugetPackageESName nugetPackageESDescription packageDir
-)
-
 Target "Post-Clean" (fun _ ->
     CleanDirs [buildDir]
 )
@@ -44,10 +30,8 @@ Target "Default" DoNothing
 
 "Clean"
     ==> "RestorePackages"
-    ==> "Build"
 
 "Build"
-    ==> "Package-Project"
     ==> "Post-Clean"
     ==> "Package"
 
