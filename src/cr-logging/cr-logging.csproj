@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>CR.Logging</RootNamespace>
+    <AssemblyName>CR.Logging</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
