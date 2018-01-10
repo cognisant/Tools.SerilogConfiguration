@@ -13,11 +13,8 @@ IF NOT [%2]==[] (set BUILDMODE="%2")
 SET VERSION=0.0.0
 IF NOT [%3]==[] (set VERSION=%3)
 
-dotnet publish -p:PackageVersion=%VERSION% cr-logging -o ../build/cr-logging -c Release --self-contained -r -win-x86
+dotnet pack -p:PackageVersion=%VERSION% cr-logging/cr-logging.csproj -o dist -c Release --include-symbols
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-dotnet publish -p:PackageVersion=%VERSION% cr-logging.eventstore -o ../build/cr-logging.eventstore -c Release --self-contained -r -win-x86
-if %errorlevel% neq 0 exit /b %errorlevel%
-
-"packages/FAKE/tools/Fake.exe" build.fsx "target=%TARGET%" "buildMode=%BUILDMODE%" "version=%VERSION%"
+dotnet pack -p:PackageVersion=%VERSION% cr-logging.eventstore/cr-logging.eventstore.csproj -o dist -c Release --include-symbols
 if %errorlevel% neq 0 exit /b %errorlevel%
