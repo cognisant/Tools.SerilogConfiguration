@@ -9,7 +9,7 @@ Function Build-Fake([string]$folderName){
     ./build.cmd package release $version
     popd
 
-    cp $folderName\dist\*.zip .\dist
+
     cp $folderName\dist\*.nupkg .\dist
 
     if($LastExitCode -ne 0){
