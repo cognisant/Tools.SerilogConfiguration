@@ -3,23 +3,17 @@ A wrapper for initialising Serilog consistently.
 
 ## Configuration
 
-### Mandatory Parameters
-The following appsettings are mandatory; the program will fail if these are not specified in the app.config.
+### Parameters
 
-All of these values are booleans.
-
-    <add key="CR.Logging.Json.Enabled" value="true"/>
-    <add key="CR.Logging.Json.RotateOnFileSizeLimit" value="true"/>
-    <add key="CR.Logging.Text.Enabled" value="true"/>
-    <add key="CR.Logging.Text.RotateOnFileSizeLimit" value="true"/>
-    <add key="CR.Logging.Console.Enabled" value="true"/>
-
-### Optional Parameters
-
-The following appsettings are not mandatory; the program will not fail of these are not specified in the app.config, or their values are empty/whitepace.
+All the appsettings are not mandatory; the program will not fail of these are not specified in the app.config, or their values are empty/whitepace.
 
 If an invalid value (not empty/whitespace) is entered in any of these fields, however, the program will fail.
 
+    <add key="CR.Logging.Json.Enabled" value="true"/> <!--Default: 'false' -->
+    <add key="CR.Logging.Json.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
+    <add key="CR.Logging.Text.Enabled" value="true"/> <!--Default: 'false' -->
+    <add key="CR.Logging.Text.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
+    <add key="CR.Logging.Console.Enabled" value="true"/> <!--Default: 'false' -->
     <add key="CR.Logging.Json.FilePath" value=""/>  <!-- Default: './logs/log.json' -->
     <add key="CR.Logging.Json.MinLogLevel" value="Information"/> <!-- Default: 'Debug' -->
     <add key="CR.Logging.Json.FileRotationTime" value="Month"/> <!-- Default: 'Day' -->
@@ -54,7 +48,7 @@ File size limits are specified in bytes.
 Logging via Serilog is simple:
 
     logger.Error("{value} is larger than {max}. Cannot fulfill request {@request}", value, max, request);
-    
+
 JSON layouts will store the template string as it appears above, as well as each of the parameters specified after the template string, while text layouts will replace the properties in the template string, and output the result.
 
 When specifying a property in the template string, `{property}` will result in `.ToString()` being called on the provided object, while `{@property}` will result in the object being serialized.
