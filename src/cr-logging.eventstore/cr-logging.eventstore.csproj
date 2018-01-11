@@ -4,6 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>CR.Logging.EventStore</AssemblyName>
     <RootNamespace>CR.Logging.EventStore</RootNamespace>
+    <Description>A wrapper for initialising Serilog consistently suuporting.</Description>
+    <Copyright>Cognisant 2017</Copyright>
+    <RepositoryUrl>https://github.com/cognisant/cr-logging</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
