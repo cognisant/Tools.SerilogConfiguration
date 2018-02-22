@@ -11,7 +11,7 @@ namespace CR.Logging
     {
         public static Logger SetupLogger()
         {
-            var logger = new LoggerConfiguration();
+            var logger = new LoggerConfiguration().MinimumLevel.Verbose();
 
             #region Optional Fields
 
