@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -9,8 +10,11 @@ namespace CR.Logging
 {
     public static class Logging
     {
-        public static Logger SetupLogger()
+        private static IConfigurationRoot _appConfig;
+
+        public static Logger SetupLogger(IConfigurationRoot appConfig = null)
         {
+            _appConfig = appConfig;
             var logger = new LoggerConfiguration();
 
             #region Optional Fields
@@ -66,7 +70,7 @@ namespace CR.Logging
 
         private static T ParseConfigValue<T>(string configName, TryParse<string, T> tryParse, T? defaultValue = null) where T : struct
         {
-            var valueString = ConfigurationManager.AppSettings[configName];
+            var valueString = _appConfig == null ? ConfigurationManager.AppSettings[configName] : _appConfig[configName];
             if (defaultValue.HasValue)
             {
                 if (string.IsNullOrWhiteSpace(valueString)) return defaultValue.Value;
@@ -77,7 +81,7 @@ namespace CR.Logging
 
         private static string GetConfigString(string configName, string defaultValue = null)
         {
-            var value = ConfigurationManager.AppSettings[configName];
+            var value = _appConfig == null ? ConfigurationManager.AppSettings[configName] : _appConfig[configName];
             return string.IsNullOrWhiteSpace(value) ? defaultValue ?? throw new ArgumentNullException($"Please specify a value for {configName} in the App.config.", configName) : value;
         }
     }
