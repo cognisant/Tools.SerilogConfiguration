@@ -15,7 +15,8 @@ namespace CR.Logging
         public static Logger SetupLogger(IConfigurationRoot appConfig = null)
         {
             _appConfig = appConfig;
-            var logger = new LoggerConfiguration();
+            var logger = new LoggerConfiguration().MinimumLevel.Verbose();
+
 
             #region Optional Fields
 
@@ -56,7 +57,7 @@ namespace CR.Logging
             if (textLoggingEnabled) logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
             if (consoleLoggingEnabled) logger.WriteTo.Console(consoleMinLogLevel);
 
-            return logger.MinimumLevel.ControlledBy(new LoggingLevelSwitch()).CreateLogger();
+            return logger.CreateLogger();
         }
 
         private static void WriteToFile(this LoggerConfiguration loggerConfig, ITextFormatter formatter, string filePath, LogEventLevel logLevel, RollingInterval rollingInterval, bool rollOnFileSizeLimit, long fileSizeLimitBytes)
