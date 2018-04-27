@@ -12,14 +12,14 @@ namespace CR.Logging
     using Serilog.Formatting.Json;
 
     /// <summary>
-    /// Formatter to output into something readable by Logstash
+    /// Formatter to output into json which is readable by Logstash
     /// </summary>
     public class CrLogstashJsonFormatter : ITextFormatter
     {
         private static readonly JsonValueFormatter ValueFormatter = new JsonValueFormatter();
 
         /// <summary>
-        /// Formats a lgo event.
+        /// Formats a log event.
         /// </summary>
         /// <param name="logEvent">Log Event</param>
         /// <param name="output">Text writer output</param>

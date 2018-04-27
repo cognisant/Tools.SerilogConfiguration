@@ -13,7 +13,7 @@ namespace CR.Logging
     using Serilog.Formatting;
 
     /// <summary>
-    /// Core logging.
+    /// Main Logging class. Holds the methods for setting up a SeriLog Logger.
     /// </summary>
     public static class Logging
     {
