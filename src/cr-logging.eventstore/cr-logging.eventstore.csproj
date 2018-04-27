@@ -12,6 +12,7 @@
     <PackageIconUrl>https://github.com/cognisant/cr-logging/blob/master/logo.png</PackageIconUrl>
     <Authors>Cognisant</Authors>
     <Company>Cognisant</Company>
+    <PackageTags>Serilog, EventStore, Logging</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
