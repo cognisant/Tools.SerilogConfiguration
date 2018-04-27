@@ -10,6 +10,8 @@
     <PackageProjectUrl>https://github.com/cognisant/cr-logging</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/cognisant/cr-logging/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://github.com/cognisant/cr-logging/blob/master/logo.png</PackageIconUrl>
+    <Authors>Cognisant</Authors>
+    <Company>Cognisant</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
