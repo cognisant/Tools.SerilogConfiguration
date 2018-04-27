@@ -7,6 +7,9 @@
     <Description>A wrapper for initialising Serilog consistently.</Description>
     <Copyright>Cognisant 2017</Copyright>
     <RepositoryUrl>https://github.com/cognisant/cr-logging</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/cognisant/cr-logging</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/cognisant/cr-logging/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/cognisant/cr-logging/blob/master/logo.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
