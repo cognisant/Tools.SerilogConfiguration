@@ -13,52 +13,51 @@ namespace CR.Logging
     using Serilog.Formatting;
 
     /// <summary>
-    /// The Logging helper class which can be used to initialize a pre-configured Serilog Logger instance.
+    /// The Logging helper class which can be used to initialize a pre-configured Serilog <see cref="Logger"/> instance.
     /// </summary>
     // ReSharper disable once UnusedMember.Global
     public static class Logging
     {
-        private static IConfigurationRoot _appConfig;
-
         private delegate bool TryParse<in T1, T2>(T1 valueToParse, out T2 obj2);
 
         /// <summary>
-        /// Build a new Serilog Logger with the provided configuration.
+        /// Build a new Serilog <see cref="Logger"/> with the provided configuration.
         /// </summary>
-        /// <param name="appConfig">An optional IConfigurationRoot to read the Serilog Logger configuration from; if this is null (default), the configuration will be read from the App.Config..</param>
-        /// <returns>A Serilog Logger configured according to the passed in (or, if none is passed in, the app.config) configuration.</returns>
+        /// <param name="configuration">An optional <see cref="IConfiguration"/> to read the Serilog <see cref="Logger"/> configuration from; if this is null (default), the configuration will be read from the App.Config.</param>
+        /// <returns>A Serilog <see cref="Logger"/> configured according to the passed in (or, if none is passed in, the app.config) configuration.</returns>
+        /// <exception cref="ArgumentException">Thrown when a configuration variable has been set incorrectly (not missing, empty or whitespace).</exception>
+        /// <exception cref="ArgumentNullException">Thrown when a configuration variableis missing, or is empty or whitespace, and no default is specified.</exception>
         // ReSharper disable once UnusedMember.Global
-        public static Logger SetupLogger(IConfigurationRoot appConfig = null)
+        public static Logger SetupLogger(IConfiguration configuration = null)
         {
-            _appConfig = appConfig;
             var logger = new LoggerConfiguration().MinimumLevel.Verbose();
+            var jsonLoggingEnabled = ParseConfigValue<bool>(configuration, "CR.Logging.Json.Enabled", bool.TryParse, false);
 
-            var jsonLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Json.Enabled", bool.TryParse, false);
             if (jsonLoggingEnabled)
             {
-                var jsonFileRotateOnFileSizeLimit = ParseConfigValue<bool>("CR.Logging.Json.RotateOnFileSizeLimit", bool.TryParse, false);
-                var jsonLogFile = GetConfigString("CR.Logging.Json.FilePath", "./logs/log.json");
-                var jsonMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
-                var jsonFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
-                var jsonFileSizeLimit = ParseConfigValue<long>("CR.Logging.Json.FileRotationSizeLimit", long.TryParse, 26214400);
+                var jsonFileRotateOnFileSizeLimit = ParseConfigValue<bool>(configuration, "CR.Logging.Json.RotateOnFileSizeLimit", bool.TryParse, false);
+                var jsonLogFile = GetConfigString(configuration, "CR.Logging.Json.FilePath", "./logs/log.json");
+                var jsonMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, "CR.Logging.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+                var jsonFileRotationTime = ParseConfigValue<RollingInterval>(configuration, "CR.Logging.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
+                var jsonFileSizeLimit = ParseConfigValue<long>(configuration, "CR.Logging.Json.FileRotationSizeLimit", long.TryParse, 26214400);
                 logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
             }
 
-            var textLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Text.Enabled", bool.TryParse, false);
+            var textLoggingEnabled = ParseConfigValue<bool>(configuration, "CR.Logging.Text.Enabled", bool.TryParse, false);
             if (textLoggingEnabled)
             {
-                var textFileRotateOnFileSizeLimit = ParseConfigValue<bool>("CR.Logging.Text.RotateOnFileSizeLimit", bool.TryParse, false);
-                var textLogFile = GetConfigString("CR.Logging.Text.FilePath", "./logs/log.log");
-                var textMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Text.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
-                var textFileRotationTime = ParseConfigValue<RollingInterval>("CR.Logging.Text.FileRotationTime", Enum.TryParse, RollingInterval.Day);
-                var textFileSizeLimit = ParseConfigValue<long>("CR.Logging.Text.FileRotationSizeLimit", long.TryParse, 26214400);
+                var textFileRotateOnFileSizeLimit = ParseConfigValue<bool>(configuration, "CR.Logging.Text.RotateOnFileSizeLimit", bool.TryParse, false);
+                var textLogFile = GetConfigString(configuration, "CR.Logging.Text.FilePath", "./logs/log.log");
+                var textMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, "CR.Logging.Text.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+                var textFileRotationTime = ParseConfigValue<RollingInterval>(configuration, "CR.Logging.Text.FileRotationTime", Enum.TryParse, RollingInterval.Day);
+                var textFileSizeLimit = ParseConfigValue<long>(configuration, "CR.Logging.Text.FileRotationSizeLimit", long.TryParse, 26214400);
                 logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
             }
 
-            var consoleLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Console.Enabled", bool.TryParse, false); // ReSharper disable once InvertIf
+            var consoleLoggingEnabled = ParseConfigValue<bool>(configuration, "CR.Logging.Console.Enabled", bool.TryParse, false); // ReSharper disable once InvertIf
             if (consoleLoggingEnabled)
             {
-                var consoleMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+                var consoleMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, "CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
                 logger.WriteTo.Console(consoleMinLogLevel);
             }
 
@@ -82,10 +81,10 @@ namespace CR.Logging
             }
         }
 
-        private static T ParseConfigValue<T>(string configName, TryParse<string, T> tryParse, T? defaultValue = null)
+        private static T ParseConfigValue<T>(IConfiguration configuration, string configName, TryParse<string, T> tryParse, T? defaultValue = null)
             where T : struct
         {
-            var valueString = _appConfig == null ? ConfigurationManager.AppSettings[configName] : _appConfig[configName];
+            var valueString = configuration == null ? ConfigurationManager.AppSettings[configName] : configuration[configName];
             if (defaultValue.HasValue)
             {
                 if (string.IsNullOrWhiteSpace(valueString))
@@ -101,9 +100,9 @@ namespace CR.Logging
             return tryParse(valueString, out var value) ? value : throw new ArgumentException($"Invalid {typeof(T).Name} value specified for {configName}.", configName);
         }
 
-        private static string GetConfigString(string configName, string defaultValue = null)
+        private static string GetConfigString(IConfiguration configuration, string configName, string defaultValue = null)
         {
-            var value = _appConfig == null ? ConfigurationManager.AppSettings[configName] : _appConfig[configName];
+            var value = configuration == null ? ConfigurationManager.AppSettings[configName] : configuration[configName];
             return string.IsNullOrWhiteSpace(value) ? defaultValue ?? throw new ArgumentNullException($"Please specify a value for {configName} in the App.config.", configName) : value;
         }
     }
