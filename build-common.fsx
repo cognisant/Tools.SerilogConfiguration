@@ -1,5 +1,3 @@
-namespace build
-
 module common =
 
     open Fake
