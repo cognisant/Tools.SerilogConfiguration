@@ -5,9 +5,9 @@ A wrapper for initialising Serilog consistently.
 
 ### Parameters
 
-All the appsettings are not mandatory; the program will not fail of these are not specified in the app.config, or their values are empty/whitepace.
+All of the appsettings are optional; any settings which are missing from the configuration, or are empty/whitespace will default to the values specified below.
 
-If an invalid value (not empty/whitespace) is entered in any of these fields, however, the program will fail.
+If an invalid value (not empty/whitespace) is entered in any of these fields, however, the `Logging.SetupLogger` method will throw an argument exception which details the issue.
 
     <add key="CR.Logging.Json.Enabled" value="true"/> <!--Default: 'false' -->
     <add key="CR.Logging.Json.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
@@ -24,7 +24,7 @@ If an invalid value (not empty/whitespace) is entered in any of these fields, ho
     <add key="CR.Logging.Text.FileRotationSizeLimit" value="10000000"/> <!-- Default: '26214400' -->
     <add key="CR.Logging.Console.MinLogLevel" value="Warning"/> <!-- Default: 'Debug' -->
 
-### Log Levels
+### Log Levels (and corresponding enum integer values)
 - Verbose (0)
 - Debug (1)
 - Information (2)
@@ -32,7 +32,7 @@ If an invalid value (not empty/whitespace) is entered in any of these fields, ho
 - Error (4)
 - Fatal (5)
 
-### Rotation Times
+### Rotation Times (and corresponding enum integer values)
 - Infinite (0)
 - Year (1)
 - Month (2)
@@ -45,9 +45,9 @@ File size limits are specified in bytes.
 
 ## Usage
 
-Logging via Serilog is simple:
+A Serilog Logger can be created using the configuration specified in the app configuration by calling `Logging.SetupLogger`. An `IConfigurationRoot` can be passed to the method to read the configuration from, though if an `IConfigurationRoot` is not provided, the configuration will be read from the app.config.
 
-    logger.Error("{value} is larger than {max}. Cannot fulfill request {@request}", value, max, request);
+For more information on how to use the configured logger, visit [the Serilog documentation](https://github.com/serilog/serilog/wiki/Writing-Log-Events).
 
 JSON layouts will store the template string as it appears above, as well as each of the parameters specified after the template string, while text layouts will replace the properties in the template string, and output the result.
 
