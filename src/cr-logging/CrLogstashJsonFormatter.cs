@@ -11,18 +11,20 @@ namespace CR.Logging
     using Serilog.Formatting;
     using Serilog.Formatting.Json;
 
+    /// <inheritdoc />
     /// <summary>
-    /// Formatter to output into json which is readable by Logstash
+    /// A Serilog Formatter to output logs with a LogStash compatible JSON format.
     /// </summary>
     public class CrLogstashJsonFormatter : ITextFormatter
     {
         private static readonly JsonValueFormatter ValueFormatter = new JsonValueFormatter();
 
+        /// <inheritdoc />
         /// <summary>
-        /// Formats a log event.
+        /// Format a <see cref="LogEvent"/> into LogStash compatible JSON.
         /// </summary>
-        /// <param name="logEvent">Log Event</param>
-        /// <param name="output">Text writer output</param>
+        /// <param name="logEvent">The <see cref="LogEvent"/> to format.</param>
+        /// <param name="output">The <see cref="TextWriter"/> to output the formatted log string to.</param>
         public void Format(LogEvent logEvent, TextWriter output)
         {
             FormatContent(logEvent, output);

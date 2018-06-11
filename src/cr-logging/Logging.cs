@@ -13,8 +13,9 @@ namespace CR.Logging
     using Serilog.Formatting;
 
     /// <summary>
-    /// Main Logging class. Holds the methods for setting up a SeriLog Logger.
+    /// The Logging helper class which can be used to initialize a pre-configured Serilog Logger instance.
     /// </summary>
+    // ReSharper disable once UnusedMember.Global
     public static class Logging
     {
         private static IConfigurationRoot _appConfig;
@@ -22,10 +23,11 @@ namespace CR.Logging
         private delegate bool TryParse<in T1, T2>(T1 valueToParse, out T2 obj2);
 
         /// <summary>
-        /// Function to setup the SeriLog Logger.
+        /// Build a new Serilog Logger with the provided configuration.
         /// </summary>
-        /// <param name="appConfig">Optional IConfigurationRoot.</param>
-        /// <returns>Configured Logger</returns>
+        /// <param name="appConfig">An optional IConfigurationRoot to read the Serilog Logger configuration from; if this is null (default), the configuration will be read from the App.Config..</param>
+        /// <returns>A Serilog Logger configured according to the passed in (or, if none is passed in, the app.config) configuration.</returns>
+        // ReSharper disable once UnusedMember.Global
         public static Logger SetupLogger(IConfigurationRoot appConfig = null)
         {
             _appConfig = appConfig;
@@ -53,7 +55,7 @@ namespace CR.Logging
                 logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
             }
 
-            var consoleLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Console.Enabled", bool.TryParse, false);
+            var consoleLoggingEnabled = ParseConfigValue<bool>("CR.Logging.Console.Enabled", bool.TryParse, false); // ReSharper disable once InvertIf
             if (consoleLoggingEnabled)
             {
                 var consoleMinLogLevel = ParseConfigValue<LogEventLevel>("CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
