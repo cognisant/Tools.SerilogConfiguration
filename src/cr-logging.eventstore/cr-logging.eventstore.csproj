@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>CR.Logging.EventStore</AssemblyName>
+    <RootNamespace>CR.Logging.EventStore</RootNamespace>
+    <Description>A wrapper for initialising Serilog consistently suuporting.</Description>
+    <Copyright>Cognisant 2017</Copyright>
+    <RepositoryUrl>https://github.com/cognisant/cr-logging</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/cognisant/cr-logging/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/cognisant/cr-logging</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/cognisant/cr-logging/blob/master/logo.png</PackageIconUrl>
+    <Authors>Cognisant</Authors>
+    <Company>Cognisant</Company>
+    <PackageTags>Serilog, EventStore, Logging</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\CR.Logging.EventStore.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\CR.Logging.EventStore.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CR.CodeStyle.CSharp.Full" Version="1.0.1" />
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.1.0.23" />
+    <PackageReference Include="Serilog" Version="2.6.0" />
+  </ItemGroup>
+
+</Project>
