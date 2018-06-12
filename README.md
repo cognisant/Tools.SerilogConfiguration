@@ -45,7 +45,7 @@ File size limits are specified in bytes.
 
 ## Usage
 
-A Serilog Logger can be created using the configuration specified in the app configuration by calling `Logging.SetupLogger`. An `IConfiguration` can be passed to the method to read the configuration from, though if an `IConfigurationRoot` is not provided, the configuration will be read from the app.config.
+A Serilog Logger can be created using the configuration specified in the app configuration by calling `Logging.SetupLogger`. An `IConfiguration` can be passed to the method to read the configuration from, though if an `IConfiguration` is not provided, the configuration will be read from the app.config.
 
 For more information on how to use the configured logger, visit [the Serilog documentation](https://github.com/serilog/serilog/wiki/Writing-Log-Events).
 
