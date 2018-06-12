@@ -2,17 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CR.Logging</RootNamespace>
-    <AssemblyName>CR.Logging</AssemblyName>
-    <Description>A wrapper for initialising Serilog consistently.</Description>
-    <Copyright>Cognisant 2017</Copyright>
-    <RepositoryUrl>https://github.com/cognisant/cr-logging</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/cognisant/cr-logging</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/cognisant/cr-logging/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/cognisant/cr-logging/blob/master/logo.png</PackageIconUrl>
-    <Authors>Cognisant</Authors>
-    <Company>Cognisant</Company>
+    <RootNamespace>CR.Tools.SerilogConfiguration</RootNamespace>
+    <AssemblyName>CR.Tools.SerilogConfiguration</AssemblyName>
+    <Description>A package for initialising Serilog consistently using configuration variables.</Description>
+    <Copyright>Cognisant Research 2018</Copyright>
+    <RepositoryUrl>https://github.com/cognisant/Tools.SerilogConfiguration</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/cognisant/Tools.SerilogConfiguration</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/cognisant/Tools.SerilogConfiguration/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/cognisant/Tools.SerilogConfiguration/blob/master/logo.png</PackageIconUrl>
+    <Authors>Cognisant Research</Authors>
+    <Company>Cognisant Research</Company>
     <PackageTags>Serilog, Logging</PackageTags>
+    <Product>CR.Tools</Product>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

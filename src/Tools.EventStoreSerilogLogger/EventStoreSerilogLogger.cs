@@ -2,10 +2,10 @@
 // Copyright (c) Cognisant. All rights reserved.
 // </copyright>
 
-namespace CR.Logging.EventStore
+namespace CR.Tools.EventStoreSerilogLogger
 {
     using System;
-    using global::EventStore.ClientAPI;
+    using EventStore.ClientAPI;
     using Serilog.Core;
 
     /// <summary>

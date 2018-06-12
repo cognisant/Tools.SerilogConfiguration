@@ -2,7 +2,7 @@
 // Copyright (c) Cognisant. All rights reserved.
 // </copyright>
 
-namespace CR.Logging
+namespace CR.Tools.SerilogConfiguration
 {
     using System;
     using System.Configuration;

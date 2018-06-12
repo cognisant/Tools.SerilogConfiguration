@@ -2,17 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>CR.Logging.EventStore</AssemblyName>
-    <RootNamespace>CR.Logging.EventStore</RootNamespace>
-    <Description>A wrapper for initialising Serilog consistently suuporting.</Description>
-    <Copyright>Cognisant 2017</Copyright>
-    <RepositoryUrl>https://github.com/cognisant/cr-logging</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/cognisant/cr-logging/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/cognisant/cr-logging</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/cognisant/cr-logging/blob/master/logo.png</PackageIconUrl>
-    <Authors>Cognisant</Authors>
-    <Company>Cognisant</Company>
+    <AssemblyName>CR.Tools.EventStoreSerilogLogger</AssemblyName>
+    <RootNamespace>CR.Tools.EventStoreSerilogLogger</RootNamespace>
+    <Description>A package to use Serilog Loggers with EventStore.</Description>
+    <Copyright>Cognisant Research 2018</Copyright>
+    <RepositoryUrl>https://github.com/cognisant/Tools.EventStoreSerilogLogger</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/cognisant/Tools.EventStoreSerilogLogger/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/cognisant/Tools.EventStoreSerilogLogger</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/cognisant/Tools.EventStoreSerilogLogger/blob/master/logo.png</PackageIconUrl>
+    <Authors>Cognisant Research</Authors>
+    <Company>Cognisant Research</Company>
     <PackageTags>Serilog, EventStore, Logging</PackageTags>
+    <Product>CR.Tools</Product>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
