@@ -1,4 +1,4 @@
-# cr-logging
+# CR.Tools.SerilogConfiguration
 A wrapper for initialising Serilog consistently.
 
 ## Configuration
