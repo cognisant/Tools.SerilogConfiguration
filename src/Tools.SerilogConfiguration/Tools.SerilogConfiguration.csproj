@@ -14,7 +14,7 @@
     <Company>Cognisant Research</Company>
     <PackageTags>Serilog, Logging</PackageTags>
     <Product>CR.Tools</Product>
-    <PackageReleaseNotes>https://GitHub.com/Cognisant/Tools.SerilogConfiguration/releases/tag/$(Version)</PackageReleaseNotes>
+    <PackageReleaseNotes>https://GitHub.com/Cognisant/Tools.SerilogConfiguration/releases/tag/$(Tag)</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
