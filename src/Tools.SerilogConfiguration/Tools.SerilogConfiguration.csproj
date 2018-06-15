@@ -26,7 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>bin\Debug\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
