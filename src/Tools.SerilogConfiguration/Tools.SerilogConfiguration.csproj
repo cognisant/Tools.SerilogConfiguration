@@ -33,10 +33,10 @@
     <PackageReference Include="CR.CodeStyle.CSharp.Full" Version="[1.0.1,2.0.0-0)">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="[2.0.0,3.0.0-0)" />
-    <PackageReference Include="Serilog" Version="[2.5.0,3.0.0-0)" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="[3.0.0,4.0.0-0)" />
-    <PackageReference Include="Serilog.Sinks.File" Version="[4.0.0,5.0.0-0)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="[2.0.0,2.999.999)" />
+    <PackageReference Include="Serilog" Version="[2.5.0,2.999.999)" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="[3.0.0,3.999.999)" />
+    <PackageReference Include="Serilog.Sinks.File" Version="[4.0.0,4.999.999)" />
   </ItemGroup>
 
   <ItemGroup>
