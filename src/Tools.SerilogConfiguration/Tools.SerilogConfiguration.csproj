@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/cognisant/Tools.SerilogConfiguration</RepositoryUrl>
     <PackageProjectUrl>https://github.com/cognisant/Tools.SerilogConfiguration</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/cognisant/Tools.SerilogConfiguration/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/cognisant/Tools.SerilogConfiguration/blob/master/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/cognisant/Tools.SerilogConfiguration/master/logo.png</PackageIconUrl>
     <Authors>Cognisant Research</Authors>
     <Company>Cognisant Research</Company>
     <PackageTags>Serilog, Logging</PackageTags>
