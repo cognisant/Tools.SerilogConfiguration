@@ -31,33 +31,33 @@ namespace CR.Tools.SerilogConfiguration
         public static Logger SetupLogger(IConfiguration configuration = null)
         {
             var logger = new LoggerConfiguration().MinimumLevel.Verbose();
-            var jsonLoggingEnabled = ParseConfigValue<bool>(configuration, "CR.Logging.Json.Enabled", bool.TryParse, false);
+            var jsonLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Json.Enabled", bool.TryParse, false);
 
             if (jsonLoggingEnabled)
             {
-                var jsonFileRotateOnFileSizeLimit = ParseConfigValue<bool>(configuration, "CR.Logging.Json.RotateOnFileSizeLimit", bool.TryParse, false);
-                var jsonLogFile = GetConfigString(configuration, "CR.Logging.Json.FilePath", "./logs/log.json");
-                var jsonMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, "CR.Logging.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
-                var jsonFileRotationTime = ParseConfigValue<RollingInterval>(configuration, "CR.Logging.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
-                var jsonFileSizeLimit = ParseConfigValue<long>(configuration, "CR.Logging.Json.FileRotationSizeLimit", long.TryParse, 26214400);
+                var jsonFileRotateOnFileSizeLimit = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Json.RotateOnFileSizeLimit", bool.TryParse, false);
+                var jsonLogFile = GetConfigString(configuration, $"{nameof(SerilogConfiguration)}.Json.FilePath", "./logs/log.json");
+                var jsonMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, $"{nameof(SerilogConfiguration)}.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+                var jsonFileRotationTime = ParseConfigValue<RollingInterval>(configuration, $"{nameof(SerilogConfiguration)}.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
+                var jsonFileSizeLimit = ParseConfigValue<long>(configuration, $"{nameof(SerilogConfiguration)}.Json.FileRotationSizeLimit", long.TryParse, 26214400);
                 logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
             }
 
-            var textLoggingEnabled = ParseConfigValue<bool>(configuration, "CR.Logging.Text.Enabled", bool.TryParse, false);
+            var textLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Text.Enabled", bool.TryParse, false);
             if (textLoggingEnabled)
             {
-                var textFileRotateOnFileSizeLimit = ParseConfigValue<bool>(configuration, "CR.Logging.Text.RotateOnFileSizeLimit", bool.TryParse, false);
-                var textLogFile = GetConfigString(configuration, "CR.Logging.Text.FilePath", "./logs/log.log");
-                var textMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, "CR.Logging.Text.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
-                var textFileRotationTime = ParseConfigValue<RollingInterval>(configuration, "CR.Logging.Text.FileRotationTime", Enum.TryParse, RollingInterval.Day);
-                var textFileSizeLimit = ParseConfigValue<long>(configuration, "CR.Logging.Text.FileRotationSizeLimit", long.TryParse, 26214400);
+                var textFileRotateOnFileSizeLimit = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Text.RotateOnFileSizeLimit", bool.TryParse, false);
+                var textLogFile = GetConfigString(configuration, $"{nameof(SerilogConfiguration)}.Text.FilePath", "./logs/log.log");
+                var textMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, $"{nameof(SerilogConfiguration)}.Text.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+                var textFileRotationTime = ParseConfigValue<RollingInterval>(configuration, $"{nameof(SerilogConfiguration)}.Text.FileRotationTime", Enum.TryParse, RollingInterval.Day);
+                var textFileSizeLimit = ParseConfigValue<long>(configuration, $"{nameof(SerilogConfiguration)}.Text.FileRotationSizeLimit", long.TryParse, 26214400);
                 logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
             }
 
-            var consoleLoggingEnabled = ParseConfigValue<bool>(configuration, "CR.Logging.Console.Enabled", bool.TryParse, false); // ReSharper disable once InvertIf
+            var consoleLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Console.Enabled", bool.TryParse, false); // ReSharper disable once InvertIf
             if (consoleLoggingEnabled)
             {
-                var consoleMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, "CR.Logging.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
+                var consoleMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, $"{nameof(SerilogConfiguration)}.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
                 logger.WriteTo.Console(consoleMinLogLevel);
             }
 
