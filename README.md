@@ -9,20 +9,20 @@ All of the appsettings are optional; any settings which are missing from the con
 
 If an invalid value (not empty/whitespace) is entered in any of these fields, however, the `Logging.SetupLogger` method will throw an argument exception which details the issue.
 
-    <add key="CR.Logging.Json.Enabled" value="true"/> <!--Default: 'false' -->
-    <add key="CR.Logging.Json.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
-    <add key="CR.Logging.Text.Enabled" value="true"/> <!--Default: 'false' -->
-    <add key="CR.Logging.Text.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
-    <add key="CR.Logging.Console.Enabled" value="true"/> <!--Default: 'false' -->
-    <add key="CR.Logging.Json.FilePath" value=""/>  <!-- Default: './logs/log.json' -->
-    <add key="CR.Logging.Json.MinLogLevel" value="Information"/> <!-- Default: 'Debug' -->
-    <add key="CR.Logging.Json.FileRotationTime" value="Month"/> <!-- Default: 'Day' -->
-    <add key="CR.Logging.Json.FileRotationSizeLimit" value="10000000"/> <!-- Default: '26214400' -->
-    <add key="CR.Logging.Text.FilePath" value=""/>  <!-- Default: './logs/log.log' -->
-    <add key="CR.Logging.Text.MinLogLevel" value=""/> <!-- Default: 'Debug' -->
-    <add key="CR.Logging.Text.FileRotationTime" value="Month"/> <!-- Default: 'Day' -->
-    <add key="CR.Logging.Text.FileRotationSizeLimit" value="10000000"/> <!-- Default: '26214400' -->
-    <add key="CR.Logging.Console.MinLogLevel" value="Warning"/> <!-- Default: 'Debug' -->
+    <add key="SerilogConfiguration.Json.Enabled" value="true"/> <!--Default: 'false' -->
+    <add key="SerilogConfiguration.Json.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
+    <add key="SerilogConfiguration.Text.Enabled" value="true"/> <!--Default: 'false' -->
+    <add key="SerilogConfiguration.Text.RotateOnFileSizeLimit" value="true"/> <!--Default: 'false' -->
+    <add key="SerilogConfiguration.Console.Enabled" value="true"/> <!--Default: 'false' -->
+    <add key="SerilogConfiguration.Json.FilePath" value=""/>  <!-- Default: './logs/log.json' -->
+    <add key="SerilogConfiguration.Json.MinLogLevel" value="Information"/> <!-- Default: 'Debug' -->
+    <add key="SerilogConfiguration.Json.FileRotationTime" value="Month"/> <!-- Default: 'Day' -->
+    <add key="SerilogConfiguration.Json.FileRotationSizeLimit" value="10000000"/> <!-- Default: '26214400' -->
+    <add key="SerilogConfiguration.Text.FilePath" value=""/>  <!-- Default: './logs/log.log' -->
+    <add key="SerilogConfiguration.Text.MinLogLevel" value=""/> <!-- Default: 'Debug' -->
+    <add key="SerilogConfiguration.Text.FileRotationTime" value="Month"/> <!-- Default: 'Day' -->
+    <add key="SerilogConfiguration.Text.FileRotationSizeLimit" value="10000000"/> <!-- Default: '26214400' -->
+    <add key="SerilogConfiguration.Console.MinLogLevel" value="Warning"/> <!-- Default: 'Debug' -->
 
 ### Log Levels (and corresponding enum integer values)
 - Verbose (0)
