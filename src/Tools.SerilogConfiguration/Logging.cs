@@ -2,8 +2,6 @@
 // Copyright (c) Cognisant Research. All rights reserved.
 // </copyright>
 
-using Serilog.Formatting.Compact;
-
 namespace CR.Tools.SerilogConfiguration
 {
     using System;
@@ -13,6 +11,7 @@ namespace CR.Tools.SerilogConfiguration
     using Serilog.Core;
     using Serilog.Events;
     using Serilog.Formatting;
+    using Serilog.Formatting.Compact;
 
     /// <summary>
     /// The Logging helper class which can be used to initialize a pre-configured Serilog <see cref="Logger"/> instance.
