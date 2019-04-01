@@ -2,6 +2,8 @@
 // Copyright (c) Cognisant Research. All rights reserved.
 // </copyright>
 
+using Serilog.Formatting.Compact;
+
 namespace CR.Tools.SerilogConfiguration
 {
     using System;
@@ -38,7 +40,7 @@ namespace CR.Tools.SerilogConfiguration
                 var jsonMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, $"{nameof(SerilogConfiguration)}.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
                 var jsonFileRotationTime = ParseConfigValue<RollingInterval>(configuration, $"{nameof(SerilogConfiguration)}.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
                 var jsonFileSizeLimit = ParseConfigValue<long>(configuration, $"{nameof(SerilogConfiguration)}.Json.FileRotationSizeLimit", long.TryParse, 26214400);
-                logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
+                logger.WriteToFile(new RenderedCompactJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
             }
 
             var textLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Text.Enabled", bool.TryParse, false);
