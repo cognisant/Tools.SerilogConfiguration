@@ -1,6 +1,8 @@
-﻿// <copyright file="Logging.cs" company="Cognisant">
-// Copyright (c) Cognisant. All rights reserved.
+﻿// <copyright file="Logging.cs" company="Cognisant Research">
+// Copyright (c) Cognisant Research. All rights reserved.
 // </copyright>
+
+using Serilog.Formatting.Compact;
 
 namespace CR.Tools.SerilogConfiguration
 {
@@ -15,7 +17,6 @@ namespace CR.Tools.SerilogConfiguration
     /// <summary>
     /// The Logging helper class which can be used to initialize a pre-configured Serilog <see cref="Logger"/> instance.
     /// </summary>
-    // ReSharper disable once UnusedMember.Global
     public static class Logging
     {
         private delegate bool TryParse<in T1, T2>(T1 valueToParse, out T2 obj2);
@@ -27,7 +28,6 @@ namespace CR.Tools.SerilogConfiguration
         /// <returns>A Serilog <see cref="Logger"/> configured according to the passed in (or, if none is passed in, the app.config) configuration.</returns>
         /// <exception cref="ArgumentException">Thrown when a configuration variable has been set incorrectly (not missing, empty or whitespace).</exception>
         /// <exception cref="ArgumentNullException">Thrown when a configuration variableis missing, or is empty or whitespace, and no default is specified.</exception>
-        // ReSharper disable once UnusedMember.Global
         public static Logger SetupLogger(IConfiguration configuration = null)
         {
             var logger = new LoggerConfiguration().MinimumLevel.Verbose();
@@ -40,7 +40,7 @@ namespace CR.Tools.SerilogConfiguration
                 var jsonMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, $"{nameof(SerilogConfiguration)}.Json.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
                 var jsonFileRotationTime = ParseConfigValue<RollingInterval>(configuration, $"{nameof(SerilogConfiguration)}.Json.FileRotationTime", Enum.TryParse, RollingInterval.Day);
                 var jsonFileSizeLimit = ParseConfigValue<long>(configuration, $"{nameof(SerilogConfiguration)}.Json.FileRotationSizeLimit", long.TryParse, 26214400);
-                logger.WriteToFile(new CrLogstashJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
+                logger.WriteToFile(new RenderedCompactJsonFormatter(), jsonLogFile, jsonMinLogLevel, jsonFileRotationTime, jsonFileRotateOnFileSizeLimit, jsonFileSizeLimit);
             }
 
             var textLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Text.Enabled", bool.TryParse, false);
@@ -54,7 +54,7 @@ namespace CR.Tools.SerilogConfiguration
                 logger.WriteToFile(null, textLogFile, textMinLogLevel, textFileRotationTime, textFileRotateOnFileSizeLimit, textFileSizeLimit);
             }
 
-            var consoleLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Console.Enabled", bool.TryParse, false); // ReSharper disable once InvertIf
+            var consoleLoggingEnabled = ParseConfigValue<bool>(configuration, $"{nameof(SerilogConfiguration)}.Console.Enabled", bool.TryParse, false);
             if (consoleLoggingEnabled)
             {
                 var consoleMinLogLevel = ParseConfigValue<LogEventLevel>(configuration, $"{nameof(SerilogConfiguration)}.Console.MinLogLevel", Enum.TryParse, LogEventLevel.Debug);
