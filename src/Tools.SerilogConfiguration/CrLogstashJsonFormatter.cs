@@ -1,5 +1,5 @@
-﻿// <copyright file="CrLogstashJsonFormatter.cs" company="Cognisant">
-// Copyright (c) Cognisant. All rights reserved.
+﻿// <copyright file="CrLogstashJsonFormatter.cs" company="Cognisant Research">
+// Copyright (c) Cognisant Research. All rights reserved.
 // </copyright>
 
 namespace CR.Tools.SerilogConfiguration
