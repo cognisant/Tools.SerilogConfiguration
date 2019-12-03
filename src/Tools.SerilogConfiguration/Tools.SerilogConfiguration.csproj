@@ -9,7 +9,8 @@
     <RepositoryUrl>https://github.com/qphl/Tools.SerilogConfiguration</RepositoryUrl>
     <PackageProjectUrl>https://github.com/qphl/Tools.SerilogConfiguration</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/qphl/Tools.SerilogConfiguration/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/qphl/Tools.SerilogConfiguration/master/logo.png</PackageIconUrl>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <PackageIcon>Logo.png</PackageIcon>
     <Authors>Corsham Science</Authors>
     <Company>Corsham Science</Company>
     <PackageTags>Serilog, Logging</PackageTags>
@@ -28,6 +29,13 @@
     <WarningsAsErrors />
     <DocumentationFile>bin\Release\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Logo.png">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CorshamScience.CodeStyle.CSharp.Full" Version="3.0.0">
