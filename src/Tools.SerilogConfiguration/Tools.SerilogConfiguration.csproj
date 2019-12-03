@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CR.Tools.SerilogConfiguration</RootNamespace>
-    <AssemblyName>CR.Tools.SerilogConfiguration</AssemblyName>
+    <RootNamespace>CorshamScience.Tools.SerilogConfiguration</RootNamespace>
+    <AssemblyName>CorshamScience.Tools.SerilogConfiguration</AssemblyName>
     <Description>A package for initialising Serilog consistently using configuration variables.</Description>
     <Copyright>Corsham Science 2019</Copyright>
     <RepositoryUrl>https://github.com/qphl/Tools.SerilogConfiguration</RepositoryUrl>
@@ -13,13 +13,13 @@
     <PackageIcon>Logo.png</PackageIcon>
     <Authors>Corsham Science</Authors>
     <Company>Corsham Science</Company>
-    <PackageTags>Serilog, Logging</PackageTags>
+    <PackageTags>CorshamScience, Corsham, Science, Serilog, Logging, Configuration</PackageTags>
     <Product>CorshamScience.Tools</Product>
     <PackageReleaseNotes>https://GitHub.com/qphl/Tools.SerilogConfiguration/releases/tag/$(Tag)</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\CorshamScience.Tools.SerilogConfiguration.xml</DocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors>NU1605</WarningsAsErrors>
   </PropertyGroup>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>bin\Release\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\CorshamScience.Tools.SerilogConfiguration.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

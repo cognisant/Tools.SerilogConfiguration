@@ -2,7 +2,7 @@
 // Copyright (c) Corsham Science. All rights reserved.
 // </copyright>
 
-namespace CR.Tools.SerilogConfiguration
+namespace CorshamScience.Tools.SerilogConfiguration
 {
     using System;
     using System.Configuration;

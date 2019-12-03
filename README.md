@@ -1,4 +1,4 @@
-# CR.Tools.SerilogConfiguration
+# CorshamScience.Tools.SerilogConfiguration
 A wrapper for initialising Serilog consistently.
 
 ## Configuration
