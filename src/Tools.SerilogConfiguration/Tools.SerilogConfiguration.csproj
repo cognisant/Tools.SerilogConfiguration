@@ -2,23 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CR.Tools.SerilogConfiguration</RootNamespace>
-    <AssemblyName>CR.Tools.SerilogConfiguration</AssemblyName>
+    <RootNamespace>CorshamScience.Tools.SerilogConfiguration</RootNamespace>
+    <AssemblyName>CorshamScience.Tools.SerilogConfiguration</AssemblyName>
     <Description>A package for initialising Serilog consistently using configuration variables.</Description>
-    <Copyright>Cognisant Research 2018</Copyright>
-    <RepositoryUrl>https://github.com/cognisant/Tools.SerilogConfiguration</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/cognisant/Tools.SerilogConfiguration</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/cognisant/Tools.SerilogConfiguration/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/cognisant/Tools.SerilogConfiguration/master/logo.png</PackageIconUrl>
-    <Authors>Cognisant Research</Authors>
-    <Company>Cognisant Research</Company>
-    <PackageTags>Serilog, Logging</PackageTags>
-    <Product>CR.Tools</Product>
-    <PackageReleaseNotes>https://GitHub.com/Cognisant/Tools.SerilogConfiguration/releases/tag/$(Tag)</PackageReleaseNotes>
+    <Copyright>Corsham Science 2019</Copyright>
+    <RepositoryUrl>https://github.com/qphl/Tools.SerilogConfiguration</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/qphl/Tools.SerilogConfiguration</PackageProjectUrl>
+    <PackageLicense>https://github.com/qphl/Tools.SerilogConfiguration/blob/master/LICENSE</PackageLicense>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <PackageIcon>Logo.png</PackageIcon>
+    <Authors>Corsham Science</Authors>
+    <Company>Corsham Science</Company>
+    <PackageTags>CorshamScience, Corsham, Science, Serilog, Logging, Configuration</PackageTags>
+    <Product>CorshamScience.Tools</Product>
+    <PackageReleaseNotes>https://GitHub.com/qphl/Tools.SerilogConfiguration/releases/tag/$(Tag)</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\CorshamScience.Tools.SerilogConfiguration.xml</DocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors>NU1605</WarningsAsErrors>
   </PropertyGroup>
@@ -26,24 +27,27 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>bin\Release\netstandard2.0\CR.Tools.SerilogConfiguration.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\CorshamScience.Tools.SerilogConfiguration.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CR.CodeStyle.CSharp.Full" Version="2.0.1">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="[2.0.0,3.0.0-a)" />
-    <PackageReference Include="Serilog" Version="[2.5.0,3.0.0-a)" />
-    <PackageReference Include="Serilog.Formatting.Compact" Version="[1.0.0,2.0.0-a)" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="[3.0.0,4.0.0-a)" />
-    <PackageReference Include="Serilog.Sinks.File" Version="[4.0.0,5.0.0-a)" />
+    <None Include="Logo.png">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Configuration">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7\System.Configuration.dll</HintPath>
-    </Reference>
+    <PackageReference Include="CorshamScience.CodeStyle.CSharp.Full" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="[3.0.1,4.0.0-a)" />
+    <PackageReference Include="Serilog" Version="[2.9.0,3.0.0-a)" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="[1.1.0,2.0.0-a)" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="[3.1.1,4.0.0-a)" />
+    <PackageReference Include="Serilog.Sinks.File" Version="[4.1.0,5.0.0-a)" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="[4.6.0,5.0.0-a)" />
   </ItemGroup>
 
 </Project>
