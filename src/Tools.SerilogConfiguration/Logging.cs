@@ -1,5 +1,5 @@
-﻿// <copyright file="Logging.cs" company="Cognisant Research">
-// Copyright (c) Cognisant Research. All rights reserved.
+﻿// <copyright file="Logging.cs" company="Corsham Science">
+// Copyright (c) Corsham Science. All rights reserved.
 // </copyright>
 
 namespace CR.Tools.SerilogConfiguration

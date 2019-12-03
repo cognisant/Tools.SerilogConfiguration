@@ -30,8 +30,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CR.CodeStyle.CSharp.Full" Version="2.0.1">
-      <PrivateAssets>All</PrivateAssets>
+    <PackageReference Include="CorshamScience.CodeStyle.CSharp.Full" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="[2.0.0,3.0.0-a)" />
     <PackageReference Include="Serilog" Version="[2.5.0,3.0.0-a)" />
